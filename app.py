@@ -77,12 +77,6 @@ def handle_message(event):
     )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
-        
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    message = text=event.message.text
-    if re.match('酒店',message):
         flex_message = TextSendMessage(text='以下有雷，請小心',
                                quick_reply=QuickReply(items=[
                                    QuickReplyButton(action=MessageAction(label="按我", text="按！")),
@@ -96,8 +90,7 @@ def handle_message(event):
                                    QuickReplyButton(action=MessageAction(label="按我", text="按！"))
                                ]))
         line_bot_api.reply_message(event.reply_token, flex_message)
-    else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
+
         
 #主程式
 import os
