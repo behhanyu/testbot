@@ -57,23 +57,26 @@ def handle_message(event):
             title='Menu',
             text='請選擇類型',
             actions=[
-                MessageAction(
+                PostbackAction(
                     label='酒吧',
-                    text='酒吧',
+                    display_text='酒吧',
+                    data='A酒吧'
                 ),
-                MessageAction(
+                PostbackAction(
                     label='旅館',
-                    text='旅館',
+                    display_text='旅館',
+                    data='A旅館'
                 ),
-                MessageAction(
+                PostbackAction(
                     label='全都要',
-                    text='全都要',
+                    display_text='全都要',
+                    data='A全都要'
                 )
             ]
         )
     )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif re.match('酒吧',message):
+    elif event.postback.data[0:1] == "A":
         flex_message = TextSendMessage(text='以下有雷，請小心',
                                quick_reply=QuickReply(items=[
                                    QuickReplyButton(action=MessageAction(label="按我", text="按！")),
