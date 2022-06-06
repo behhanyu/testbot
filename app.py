@@ -78,13 +78,13 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
     case 'postback':
         let data = querystring.parse(event.postback.data);
-        if (data.action === 'url' && data.item === 'clarence') {
-            return client.replyMessage(event.replyToken, {
+        if (data.action === A酒吧') {
+            return line_bot_api.replyMessage(event.replyToken, {
                 type: 'text',
                 text: 'https://ithelp.ithome.com.tw/users/20117701/ironman/2634'
             });
         }
-        return client.replyMessage(event.replyToken, {
+        return line_bot_api.replyMessage(event.replyToken, {
             type: 'text',
             text: `Got postback: ${JSON.stringify(data)}`
         });
