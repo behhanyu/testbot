@@ -4,11 +4,10 @@ Created on Wed Jun  2 21:16:35 2021
 @author: Ivan
 版權屬於「行銷搬進大程式」所有，若有疑問，可聯絡ivanyang0606@gmail.com
 Line Bot聊天機器人
-第一章 Line Bot申請與串接
-Line Bot機器人串接與測試
+第四章 選單功能
+按鈕樣板TemplateSendMessage
 """
-# 載入LineBot所需要的套件
-import os
+#載入LineBot所需要的套件
 from flask import Flask, request, abort
 
 from linebot import (
@@ -18,20 +17,18 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('TuWwNdW0ZSpc+bYs/tiW2eSNy2OHbJCQ9Ry0/BRrNrKGEBIkpByKcZek6p1G05VTPQZZpKrmYUNX5AhFvRrwglntt6CKb2XYyEXafpWmyEYTtBtLNZeb1q4B1hXLobHJUeHUgBsS4ghbICyGJoiAMwdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('你自己的token')
 # 必須放上自己的Channel Secret
-handler = WebhookHandler('31092f163fbb7a9bd6af2e1d6c0bde4b')
+handler = WebhookHandler('你自己的secret')
 
-line_bot_api.push_message('Uf98cfa672a8785aa0b0d6bbd458a5bef', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('你自己的ID', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
-
-
-@ app.route("/callback", methods=['POST'])
+@app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
@@ -48,8 +45,9 @@ def callback():
 
     return 'OK'
 
-
-
+#訊息傳遞區塊
+##### 基本上程式編輯都在這個function #####
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
     if re.match('告訴我秘密',message):
