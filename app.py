@@ -76,20 +76,18 @@ def handle_message(event):
             )
         )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    if data.action == 'A酒吧':
-        flex_message = TextSendMessage(text='以下有雷，請小心',
-                               quick_reply=QuickReply(items=[
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="別按我", text="你按屁喔！爆炸了拉！！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！"))
-                               ]))
-        line_bot_api.reply_message(event.reply_token, flex_message)
+    case 'postback':
+        let data = querystring.parse(event.postback.data);
+        if (data.action === 'url' && data.item === 'clarence') {
+            return client.replyMessage(event.replyToken, {
+                type: 'text',
+                text: 'https://ithelp.ithome.com.tw/users/20117701/ironman/2634'
+            });
+        }
+        return client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: `Got postback: ${JSON.stringify(data)}`
+        });
 
         
 #主程式
