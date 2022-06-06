@@ -49,9 +49,8 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if isinstance(event, MessageEvent): 
-        message = text=event.message.text
-        if re.match('告訴我秘密',message):
+    if isinstance(event, MessageEvent):
+        if event.message.text == "告訴我秘密":
             buttons_template_message = TemplateSendMessage(
             alt_text='這個看不到',
             template=ButtonsTemplate(
