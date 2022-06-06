@@ -51,34 +51,31 @@ def callback():
 def handle_message(event):
     message = text=event.message.text
     if re.match('告訴我秘密',message):
-        flex_message = TextSendMessage(text='請輸入台北市的任意地區（區或街道），或點擊下列的快捷鍵選擇地區',  # （暫時只能做到有選項，無法自由填入）
-                                       quick_reply=QuickReply(items=[
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="中正區", text="中正區", data='B&' + bar_or_hotel + '&中正區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="萬華區", text="萬華區", data='B&' + bar_or_hotel + '&萬華區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="大同區", text="大同區", data='B&' + bar_or_hotel + '&大同區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="中山區", text="中山區", data='B&' + bar_or_hotel + '&中山區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="松山區", text="松山區", data='B&' + bar_or_hotel + '&松山區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="大安區", text="大安區", data='B&' + bar_or_hotel + '&大安區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="信義區", text="信義區", data='B&' + bar_or_hotel + '&信義區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="內湖區", text="內湖區", data='B&' + bar_or_hotel + '&內湖區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="南港區", text="南港區", data='B&' + bar_or_hotel + '&南港區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="士林區", text="士林區", data='B&' + bar_or_hotel + '&士林區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="北投區", text="北投區", data='B&' + bar_or_hotel + '&北投區')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="文山區", text="文山區", data='B&' + bar_or_hotel + '&文山區')),
-                                       ]))
-        line_bot_api.reply_message(event.reply_token, flex_message)
+        buttons_template_message = TemplateSendMessage(
+        alt_text='這個看不到',
+        template=ButtonsTemplate(
+            title='Menu',
+            text='請選擇類型',
+            actions=[
+                PostbackAction(
+                    label='酒吧',
+                    display_text='酒吧',
+                    data='action=酒吧'
+                ),
+                PostbackAction(
+                    label='旅館',
+                    display_text='旅館',
+                    data='action=旅館'
+                ),
+                PostbackAction(
+                    label='全都要',
+                    display_text='全都要',
+                    data='action=全都要'
+                )
+            ]
+        )
+    )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
