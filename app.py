@@ -45,52 +45,82 @@ def callback():
 
     return 'OK'
 
-#訊息傳遞區塊
-##### 基本上程式編輯都在這個function #####
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    message = text=event.message.text
-    if re.match('告訴我秘密',message):
-        buttons_template_message = TemplateSendMessage(
-        alt_text='這個看不到',
-        template=ButtonsTemplate(
-            title='Menu',
-            text='請選擇類型',
-            actions=[
-                PostbackAction(
-                    label='酒吧',
-                    display_text='酒吧',
-                    data='action=酒吧'
-                ),
-                PostbackAction(
-                    label='旅館',
-                    display_text='旅館',
-                    data='action=旅館'
-                ),
-                PostbackAction(
-                    label='全都要',
-                    display_text='全都要',
-                    data='action=全都要'
-                )
-            ]
-        )
-    )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
-        flex_message = TextSendMessage(text='以下有雷，請小心',
-                               quick_reply=QuickReply(items=[
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="別按我", text="你按屁喔！爆炸了拉！！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
-                                   QuickReplyButton(action=MessageAction(label="按我", text="按！"))
-                               ]))
-        line_bot_api.reply_message(event.reply_token, flex_message)
+    #訊息傳遞區塊
+    for event in events:
+        if isinstance(event, MessageEvent):  # 如果有訊息事件
+ 
+            if event.message.text == "拜托":
 
-        
+                line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    event.reply_token,
+                    TemplateSendMessage(
+                        alt_text='Buttons template',
+                        template=ButtonsTemplate(
+                            title='Menu',
+                            text='請選擇地區',
+                            actions=[
+                                PostbackTemplateAction(
+                                    label='台北市',
+                                    text='台北市',
+                                    data='A&台北市'
+                                ),
+                                PostbackTemplateAction(
+                                    label='台中市',
+                                    text='台中市',
+                                    data='A&台中市'
+                                ),
+                                PostbackTemplateAction(
+                                    label='高雄市',
+                                    text='高雄市',
+                                    data='A&高雄市'
+                                )
+                            ]
+                        )
+                    )
+                )
+        elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
+
+            if event.postback.data[0:1] == "A":  # 如果回傳值為「選擇地區」
+
+                area = event.postback.data[2:]  # 透過切割字串取得地區文字
+
+                line_bot_api.reply_message(   # 回復「選擇美食類別」按鈕樣板訊息
+                    event.reply_token,
+                    TemplateSendMessage(
+                        alt_text='Buttons template',
+                        template=ButtonsTemplate(
+                            title='Menu',
+                            text='請選擇美食類別',
+                            actions=[
+                                PostbackTemplateAction(  # 將第一步驟選擇的地區，包含在第二步驟的資料中
+                                    label='火鍋',
+                                    text='火鍋',
+                                    data='B&' + area + '&火鍋'
+                                ),
+                                PostbackTemplateAction(
+                                    label='早午餐',
+                                    text='早午餐',
+                                    data='B&' + area + '&早午餐'
+                                ),
+                                PostbackTemplateAction(
+                                    label='約會餐廳',
+                                    text='約會餐廳',
+                                    data='B&' + area + '&約會餐廳'
+                                )
+                            ]
+                        )
+                    )
+                )
+
+            elif event.postback.data[0:1] == "B":  # 如果回傳值為「選擇美食類別」
+
+                result = event.postback.data[2:].split('&')  # 回傳值的字串切割
+                line_bot_api.reply_message(  # 回復訊息文字
+                    event.reply_token,
+                    # 爬取該地區正在營業，且符合所選擇的美食類別的前五大最高人氣餐廳
+                    TextSendMessage(text='success')
+                )
+
 #主程式
 import os
 if __name__ == "__main__":
