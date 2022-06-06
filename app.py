@@ -49,33 +49,34 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = text=event.message.text
-    if re.match('告訴我秘密',message):
-        buttons_template_message = TemplateSendMessage(
-        alt_text='這個看不到',
-        template=ButtonsTemplate(
-            title='Menu',
-            text='請選擇類型',
-            actions=[
-                PostbackTemplateAction(
-                    label='酒吧',
-                    display_text='酒吧',
-                    data='A酒吧'
-                ),
-                PostbackTemplateAction(
-                    label='旅館',
-                    display_text='旅館',
-                    data='A旅館'
-                ),
-                PostbackTemplateAction(
-                    label='全都要',
-                    display_text='全都要',
-                    data='A全都要'
-                )
-            ]
+    if isinstance(event, MessageEvent): 
+        message = text=event.message.text
+        if re.match('告訴我秘密',message):
+            buttons_template_message = TemplateSendMessage(
+            alt_text='這個看不到',
+            template=ButtonsTemplate(
+                title='Menu',
+                text='請選擇類型',
+                actions=[
+                    PostbackTemplateAction(
+                        label='酒吧',
+                        display_text='酒吧',
+                        data='A酒吧'
+                    ),
+                    PostbackTemplateAction(
+                        label='旅館',
+                        display_text='旅館',
+                        data='A旅館'
+                    ),
+                    PostbackTemplateAction(
+                        label='全都要',
+                        display_text='全都要',
+                        data='A全都要'
+                    )
+                ]
+            )
         )
-    )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+            line_bot_api.reply_message(event.reply_token, buttons_template_message)
     elif event.postback.data[0:1] == "A":
         flex_message = TextSendMessage(text='以下有雷，請小心',
                                quick_reply=QuickReply(items=[
