@@ -57,17 +57,17 @@ def handle_message(event):
             title='Menu',
             text='請選擇類型',
             actions=[
-                PostbackAction(
+                PostbackTemplateAction(
                     label='酒吧',
                     display_text='酒吧',
                     data='A酒吧'
                 ),
-                PostbackAction(
+                PostbackTemplateAction(
                     label='旅館',
                     display_text='旅館',
                     data='A旅館'
                 ),
-                PostbackAction(
+                PostbackTemplateAction(
                     label='全都要',
                     display_text='全都要',
                     data='A全都要'
