@@ -76,7 +76,7 @@ def handle_message(event):
             )
         )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
-    elif isinstance(event, PostbackEvent):
+    elif data=='A酒吧':
         flex_message = TextSendMessage(text='以下有雷，請小心',
                                quick_reply=QuickReply(items=[
                                    QuickReplyButton(action=MessageAction(label="按我", text="按！")),
