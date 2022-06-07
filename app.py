@@ -54,7 +54,7 @@ def handle_message(event):
             buttons_template_message = TemplateSendMessage(
             alt_text='這個看不到',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://images.app.goo.gl/KjFCdHS12ihjCJpN7',
+                thumbnail_image_url='https://yhangry.com/wp-content/uploads/2021/11/Wine-1.jpg',
                 title='Menu',
                 text='請選擇類型',
                 actions=[
@@ -110,7 +110,8 @@ def handle_postback(event):
                                                 label="文山區", text="文山區", data='B&' + bar_or_hotel + '&文山區')),
                                        ]))
         line_bot_api.reply_message(event.reply_token, flex_message)  
-        
+    elif event.postback.data[0:1] == "B":
+        result = event.postback.data[2:].split('&')
 #主程式
 import os
 if __name__ == "__main__":
