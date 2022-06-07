@@ -54,6 +54,7 @@ def handle_message(event):
             buttons_template_message = TemplateSendMessage(
             alt_text='這個看不到',
             template=ButtonsTemplate(
+                thumbnail_image_url='https://images.app.goo.gl/KjFCdHS12ihjCJpN7',
                 title='Menu',
                 text='請選擇類型',
                 actions=[
