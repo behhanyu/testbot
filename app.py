@@ -45,39 +45,55 @@ def callback():
 
     return 'OK'
 
-    for event in events:
-        if isinstance(event, MessageEvent):  # 如果有訊息事件
-
-            if event.message.text == "哈囉":
-
-                line_bot_api.reply_message(  # 回復傳入的訊息文字
-                    event.reply_token,
-                    TemplateSendMessage(
-                        alt_text='Buttons template',
-                        template=ButtonsTemplate(
-                            title='Menu',
-                            text='請選擇地區',
-                            actions=[
-                                PostbackTemplateAction(
-                                    label='台北市',
-                                    text='台北市',
-                                    data='A&台北市'
-                                ),
-                                PostbackTemplateAction(
-                                    label='台中市',
-                                    text='台中市',
-                                    data='A&台中市'
-                                ),
-                                PostbackTemplateAction(
-                                    label='高雄市',
-                                    text='高雄市',
-                                    data='A&高雄市'
-                                )
-                            ]
-                        )
+#訊息傳遞區塊
+##### 基本上程式編輯都在這個function #####
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    if isinstance(event, MessageEvent):
+        if event.message.text == "告訴我秘密":
+            buttons_template_message = TemplateSendMessage(
+            alt_text='這個看不到',
+            template=ButtonsTemplate(
+                title='Menu',
+                text='請選擇類型',
+                actions=[
+                    PostbackTemplateAction(
+                        label='酒吧',
+                        display_text='酒吧',
+                        data='A酒吧'
+                    ),
+                    PostbackTemplateAction(
+                        label='旅館',
+                        display_text='旅館',
+                        data='A旅館'
+                    ),
+                    PostbackTemplateAction(
+                        label='全都要',
+                        display_text='全都要',
+                        data='A全都要'
                     )
-                )
+                ]
+            )
+        )
+            line_bot_api.reply_message(event.reply_token, buttons_template_message)
 
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if(event.postback.data.startswith('A酒吧')):
+        flex_message = TextSendMessage(text='以下有雷，請小心',
+                               quick_reply=QuickReply(items=[
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="別按我", text="你按屁喔！爆炸了拉！！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！")),
+                                   QuickReplyButton(action=MessageAction(label="按我", text="按！"))
+                               ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)        
+        
 #主程式
 import os
 if __name__ == "__main__":
