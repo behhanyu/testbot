@@ -80,6 +80,7 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data[0:1] == "A":
+        bar_or_hotel = event.postback.data[2:]
         flex_message = TextSendMessage(text='請輸入台北市的任意地區',  # （暫時只能做到有選項，無法自由填入）
                                        quick_reply=QuickReply(items=[
                                             QuickReplyButton(action=PostbackAction(
