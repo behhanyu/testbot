@@ -17,6 +17,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+from tryfuntion import *
 import re
 app = Flask(__name__)
 
