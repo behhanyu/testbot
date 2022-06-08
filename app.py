@@ -115,19 +115,19 @@ def handle_postback(event):
                     PostbackTemplateAction(
                         label='酒吧',
                         display_text='酒吧',
-                        data='B&bar'
+                        data='B&'+mood+'bar'
                     ),
                     PostbackTemplateAction(
                         label='旅館',
                         display_text='旅館',
-                        data='B&hotel'
+                        data='B&'+mood+'hotel'
                     ),
                 ]
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
     elif event.postback.data[0:1] == "B":
-        place_type = event.postback.data[2:]
+        place_type = event.postback.data[4:]
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage('請輸入捷運站名'))
 
