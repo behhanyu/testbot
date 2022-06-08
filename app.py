@@ -8,6 +8,7 @@ Line Bot聊天機器人
 按鈕樣板TemplateSendMessage
 """
 #載入LineBot所需要的套件
+from tryfunction import *
 from flask import Flask, request, abort
 
 from linebot import (
@@ -17,7 +18,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-from tryfuntion import *
+
 import re
 app = Flask(__name__)
 
