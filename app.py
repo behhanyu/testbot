@@ -98,8 +98,9 @@ def handle_message(event):
         )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
         else:
-            message = TextSendMessage(text = location())
-            line_bot_api.reply_message(event.reply_token, message)		            
+            result = location()
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
+	            
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
