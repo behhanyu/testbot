@@ -45,8 +45,6 @@ def callback():
 
     return 'OK'
 
-#訊息傳遞區塊
-##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if isinstance(event, MessageEvent):
@@ -55,40 +53,34 @@ def handle_message(event):
             alt_text='這個看不到',
             template=ButtonsTemplate(
                 thumbnail_image_url='https://yhangry.com/wp-content/uploads/2021/11/Wine-1.jpg',
-                title='Menu',
+                title='今晚想去哪裡色色？',
                 text='請選擇類型',
                 actions=[
                     PostbackTemplateAction(
                         label='酒吧',
                         display_text='酒吧',
-                        data='A酒吧'
+                        data='A&bar'
                     ),
                     PostbackTemplateAction(
                         label='旅館',
                         display_text='旅館',
-                        data='A旅館'
+                        data='A&hotel'
                     ),
-                    PostbackTemplateAction(
-                        label='全都要',
-                        display_text='全都要',
-                        data='A全都要'
-                    )
                 ]
             )
         )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
         else:
             location = event.message.text
-            function(location)
-
+            find_sex_place(location)  # 連接另一個命名find的function			
+		
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data[0:1] == "A":
         bar_or_hotel = event.postback.data[2:]
-        line_bot_api.reply_message(event.reply_token,TextSendMessage('請輸入捷運站名')) 
-    elif event.postback.data[0:1] == "B":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage('請輸入捷運站名'))
         result = event.postback.data[2:].split('&')
-        
+
 @handler.add(FollowEvent)
 def welcome(event):
     buttons_template_message = TemplateSendMessage(
@@ -105,7 +97,7 @@ def welcome(event):
             ]
         )
     )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)	
 #主程式
 import os
 if __name__ == "__main__":
