@@ -70,7 +70,7 @@ def handle_follow(event):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if isinstance(event, MessageEvent):
-        if event.message.text == "告訴我秘密":
+        if event.message.text == "開始":
             buttons_template_message = TemplateSendMessage(
             alt_text='這個看不到',
             template=ButtonsTemplate(
@@ -81,18 +81,13 @@ def handle_message(event):
                     PostbackTemplateAction(
                         label='酒吧',
                         display_text='酒吧',
-                        data='A酒吧'
+                        data='A&bar'
                     ),
                     PostbackTemplateAction(
                         label='旅館',
                         display_text='旅館',
-                        data='A旅館'
+                        data='A&hotel'
                     ),
-                    PostbackTemplateAction(
-                        label='全都要',
-                        display_text='全都要',
-                        data='A全都要'
-                    )
                 ]
             )
         )
