@@ -84,7 +84,7 @@ def handle_message(event):
                                             QuickReplyButton(action=PostbackAction(
                                                 label="活力", text="活力", data='A&活力')),
                                             QuickReplyButton(action=PostbackAction(
-                                                label="慵懶", text="慵懶", data='A&慵懶')),
+                                                label="慵懶", text="慵懶", data='A&慵懶'))
                                        ]))
         line_bot_api.reply_message(event.reply_token, flex_message)        
 	else:
