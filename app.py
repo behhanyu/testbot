@@ -104,7 +104,6 @@ def handle_postback(event):
     if event.postback.data[0:1] == "A":
         place_type = event.postback.data[2:]
         line_bot_api.reply_message(event.reply_token,TextSendMessage('請輸入捷運站名'))
-        result = event.postback.data[2:].split('&')
         
 
 #主程式
