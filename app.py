@@ -112,6 +112,25 @@ def handle_postback(event):
         line_bot_api.reply_message(event.reply_token, flex_message)  
     elif event.postback.data[0:1] == "B":
         result = event.postback.data[2:].split('&')
+        
+@handler.add(FollowEvent)
+def welcome(event):
+    buttons_template_message = TemplateSendMessage(
+        alt_text='這個看不到',
+        template=ButtonsTemplate(
+            thumbnail_image_url='https://www.posist.com/restaurant-times/wp-content/uploads/2017/04/neon-170182_1920-768x510.jpg',
+            title='今晚去哪瑟瑟',
+            text='幫你找到最適合的酒吧或旅館，度過激情四射的夜生活！',
+            actions=[
+                MessageAction(
+                    label='點我開始！',
+                    text='開始'
+                )
+            ]
+        )
+    )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)	
+        
 #主程式
 import os
 if __name__ == "__main__":
