@@ -1,3 +1,3 @@
-def location():
-    print('yes')
-    return "yes"
+def location(message):
+    print(message)
+    return message
