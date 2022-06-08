@@ -45,59 +45,73 @@ def callback():
 
     return 'OK'
 
+#訊息傳遞區塊
+##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if isinstance(event, MessageEvent):
-        if event.message.text == "開始":
+        if event.message.text == "告訴我秘密":
             buttons_template_message = TemplateSendMessage(
             alt_text='這個看不到',
             template=ButtonsTemplate(
                 thumbnail_image_url='https://yhangry.com/wp-content/uploads/2021/11/Wine-1.jpg',
-                title='今晚想去哪裡色色？',
+                title='Menu',
                 text='請選擇類型',
                 actions=[
                     PostbackTemplateAction(
                         label='酒吧',
                         display_text='酒吧',
-                        data='A&bar'
+                        data='A酒吧'
                     ),
                     PostbackTemplateAction(
                         label='旅館',
                         display_text='旅館',
-                        data='A&hotel'
+                        data='A旅館'
                     ),
+                    PostbackTemplateAction(
+                        label='全都要',
+                        display_text='全都要',
+                        data='A全都要'
+                    )
                 ]
             )
         )
             line_bot_api.reply_message(event.reply_token, buttons_template_message)
-        else:
-            location = event.message.text
-            find_sex_place(location)  # 連接另一個命名find的function			
-		
+
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data[0:1] == "A":
         bar_or_hotel = event.postback.data[2:]
-        line_bot_api.reply_message(event.reply_token,TextSendMessage('請輸入捷運站名'))
+        flex_message = TextSendMessage(text='請輸入台北市的任意地區',  # （暫時只能做到有選項，無法自由填入）
+                                       quick_reply=QuickReply(items=[
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="中正區", text="中正區", data='B&' + bar_or_hotel + '&中正區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="萬華區", text="萬華區", data='B&' + bar_or_hotel + '&萬華區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="大同區", text="大同區", data='B&' + bar_or_hotel + '&大同區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="中山區", text="中山區", data='B&' + bar_or_hotel + '&中山區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="松山區", text="松山區", data='B&' + bar_or_hotel + '&松山區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="大安區", text="大安區", data='B&' + bar_or_hotel + '&大安區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="信義區", text="信義區", data='B&' + bar_or_hotel + '&信義區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="內湖區", text="內湖區", data='B&' + bar_or_hotel + '&內湖區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="南港區", text="南港區", data='B&' + bar_or_hotel + '&南港區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="士林區", text="士林區", data='B&' + bar_or_hotel + '&士林區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="北投區", text="北投區", data='B&' + bar_or_hotel + '&北投區')),
+                                            QuickReplyButton(action=PostbackAction(
+                                                label="文山區", text="文山區", data='B&' + bar_or_hotel + '&文山區')),
+                                       ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)  
+    elif event.postback.data[0:1] == "B":
         result = event.postback.data[2:].split('&')
-
-@handler.add(FollowEvent)
-def welcome(event):
-    buttons_template_message = TemplateSendMessage(
-        alt_text='這個看不到',
-        template=ButtonsTemplate(
-            thumbnail_image_url='https://www.posist.com/restaurant-times/wp-content/uploads/2017/04/neon-170182_1920-768x510.jpg',
-            title='今晚去哪瑟瑟',
-            text='幫你找到最適合的酒吧或旅館，度過激情四射的夜生活！',
-            actions=[
-                MessageAction(
-                    label='點我開始！',
-                    text='開始'
-                )
-            ]
-        )
-    )
-        line_bot_api.reply_message(event.reply_token, buttons_template_message)	
 #主程式
 import os
 if __name__ == "__main__":
