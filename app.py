@@ -70,56 +70,34 @@ def handle_follow(event):
     
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.message.text == "開始":
-        flex_message = TextSendMessage(text='請選擇此刻的心情吧~',  
-                                       quick_reply=QuickReply(items=[
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="歡樂", text="歡樂", data='A&歡樂')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="憂鬱", text="憂鬱", data='A&憂鬱')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="低調", text="低調", data='A&低調')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="奢侈", text="奢侈", data='A&奢侈')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="活力", text="活力", data='A&活力')),
-                                            QuickReplyButton(action=PostbackAction(
-                                                label="慵懶", text="慵懶", data='A&慵懶'))
-                                       ]))
-        line_bot_api.reply_message(event.reply_token, flex_message)        
-	else:
-		message = event.message.text
-		result = location(message)
-		line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
+    if isinstance(event, MessageEvent):
+        if event.message.text == "開始":
+			flex_message = TextSendMessage(text='請選擇此刻的心情吧~',  
+										   quick_reply=QuickReply(items=[
+												QuickReplyButton(action=PostbackAction(
+													label="歡樂", text="歡樂", data='A&歡樂')),
+												QuickReplyButton(action=PostbackAction(
+													label="憂鬱", text="憂鬱", data='A&憂鬱')),
+												QuickReplyButton(action=PostbackAction(
+													label="低調", text="低調", data='A&低調')),
+												QuickReplyButton(action=PostbackAction(
+													label="奢侈", text="奢侈", data='A&奢侈')),
+												QuickReplyButton(action=PostbackAction(
+													label="活力", text="活力", data='A&活力')),
+												QuickReplyButton(action=PostbackAction(
+													label="慵懶", text="慵懶", data='A&慵懶'))
+										   ]))
+			line_bot_api.reply_message(event.reply_token, flex_message) 
+        else:
+            message = event.message.text
+            result = location(message)
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
 	            
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
     if event.postback.data[0:1] == "A":
-        mood = event.postback.data[2:]
-		buttons_template_message = TemplateSendMessage(
-		alt_text='這個看不到',
-		template=ButtonsTemplate(
-			thumbnail_image_url='https://yhangry.com/wp-content/uploads/2021/11/Wine-1.jpg',
-			title='Menu',
-			text='請選擇類型',
-			actions=[
-				PostbackTemplateAction(
-					label='酒吧',
-					display_text='酒吧',
-					data='B&' + mood + 'bar'
-				),
-				PostbackTemplateAction(
-					label='旅館',
-					display_text='旅館',
-					data='B&' + mood + 'hotel'
-				)
-			]
-		)
-	)
-		line_bot_api.reply_message(event.reply_token, buttons_template_message)	
-    elif event.postback.data[0:1] == "B":
-		place_type = event.postback.data[4:]
+        place_type = event.postback.data[2:]
         line_bot_api.reply_message(event.reply_token,TextSendMessage('請輸入捷運站名'))
         
 
