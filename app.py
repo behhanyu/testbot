@@ -70,28 +70,27 @@ def handle_follow(event):
     
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if isinstance(event, MessageEvent):
-        if event.message.text == "開始":
-			flex_message = TextSendMessage(text='請選擇此刻的心情吧~',  
-										   quick_reply=QuickReply(items=[
-												QuickReplyButton(action=PostbackAction(
-													label="歡樂", text="歡樂", data='A&歡樂')),
-												QuickReplyButton(action=PostbackAction(
-													label="憂鬱", text="憂鬱", data='A&憂鬱')),
-												QuickReplyButton(action=PostbackAction(
-													label="低調", text="低調", data='A&低調')),
-												QuickReplyButton(action=PostbackAction(
-													label="奢侈", text="奢侈", data='A&奢侈')),
-												QuickReplyButton(action=PostbackAction(
-													label="活力", text="活力", data='A&活力')),
-												QuickReplyButton(action=PostbackAction(
-													label="慵懶", text="慵懶", data='A&慵懶'))
-										   ]))
-			line_bot_api.reply_message(event.reply_token, flex_message) 
-        else:
-            message = event.message.text
-            result = location(message)
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
+	if event.message.text == "開始":
+		flex_message = TextSendMessage(text='請選擇此刻的心情吧~',  
+									   quick_reply=QuickReply(items=[
+											QuickReplyButton(action=PostbackAction(
+												label="歡樂", text="歡樂", data='A&歡樂')),
+											QuickReplyButton(action=PostbackAction(
+												label="憂鬱", text="憂鬱", data='A&憂鬱')),
+											QuickReplyButton(action=PostbackAction(
+												label="低調", text="低調", data='A&低調')),
+											QuickReplyButton(action=PostbackAction(
+												label="奢侈", text="奢侈", data='A&奢侈')),
+											QuickReplyButton(action=PostbackAction(
+												label="活力", text="活力", data='A&活力')),
+											QuickReplyButton(action=PostbackAction(
+												label="慵懶", text="慵懶", data='A&慵懶'))
+									   ]))
+		line_bot_api.reply_message(event.reply_token, flex_message) 
+	else:
+		message = event.message.text
+		result = location(message)
+		line_bot_api.reply_message(event.reply_token, TextSendMessage(text=result))
 	            
 
 @handler.add(PostbackEvent)
