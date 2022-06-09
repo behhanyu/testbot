@@ -9,7 +9,7 @@ Line Bot聊天機器人
 """
 # 載入LineBot所需要的套件
 import os
-from new_give_15_option import *
+from tryfunction import *
 from flask import Flask, request, abort
 
 from linebot import (
