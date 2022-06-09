@@ -94,6 +94,36 @@ def handle_message(event):
                                                label="慵懶", text="慵懶", data='A&慵懶'))
                                        ]))
         line_bot_api.reply_message(event.reply_token, flex_message)
+    elif event.message.text == "0:
+        flex_message = TextSendMessage(text='請選擇訂房方式',
+                                       quick_reply=QuickReply(items=[
+                                           QuickReplyButton(action=MessageAction(
+                                               label="電話預訂", text=output.iloc[0]['formatted_phone_number'])),
+                                           QuickReplyButton(action=MessageAction(
+                                               label="線上預訂", text=output.iloc[0]['website'])),
+                                       ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)
+
+    elif event.message.text == "1:
+        flex_message = TextSendMessage(text='請選擇訂房方式',
+                                       quick_reply=QuickReply(items=[
+                                           QuickReplyButton(action=MessageAction(
+                                               label="電話預訂", text=output.iloc[1]['formatted_phone_number'])),
+                                           QuickReplyButton(action=MessageAction(
+                                               label="線上預訂", text=output.iloc[1]['website'])),
+                                       ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)
+
+    elif event.message.text == "2:
+        flex_message = TextSendMessage(text='請選擇訂房方式',
+                                       quick_reply=QuickReply(items=[
+                                           QuickReplyButton(action=MessageAction(
+                                               label="電話預訂", text=output.iloc[2]['formatted_phone_number'])),
+                                           QuickReplyButton(action=MessageAction(
+                                               label="線上預訂", text=output.iloc[2]['website'])),
+                                       ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)
+
     else:
         message = event.message.text
         result = location(message)
