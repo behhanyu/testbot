@@ -132,8 +132,7 @@ def handle_postback(event):
         crawl = location(result[1])
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=crawl))
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage('請輸入捷運站名'))
+
 
 
 # 主程式
