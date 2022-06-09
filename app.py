@@ -128,11 +128,9 @@ def handle_postback(event):
         line_bot_api.reply_message(event.reply_token, buttons_template_message)
     elif event.postback.data[0:1] == "B":
         place_type = event.postback.data[4:]
-        result = event.postback.data[2:].split('&')
-        message = TextSendMessage(text=location(result[1]))
+        result = location(place_type)
         line_bot_api.reply_message(
-            event.reply_token, message)
-
+            event.reply_token, TextSendMessage(text=result))
 
 
 # 主程式
