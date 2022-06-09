@@ -98,7 +98,7 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/wpM584d.jpg',
+                        thumbnail_image_url='https://cdn2.ettoday.net/images/5540/d5540806.jpg',
                         title='台北福華大飯店',
                         text='106台北市大安區仁愛路三段160號',
                         actions=[
@@ -117,7 +117,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
+                        thumbnail_image_url='https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill/v1611214373/hotel/aktqhvjiypw9d6barcz0.jpg',
                         title='台北遠東香格里拉',
                         text='106台北市大安區敦化南路二段201號',
                         actions=[
@@ -136,7 +136,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
+                        thumbnail_image_url='https://img.ltn.com.tw/Upload/news/600/2021/08/27/3652747_1_1.jpg',
                         title='福容大飯店 台北一館',
                         text='台北市建國南路一段266號',
                         actions=[
