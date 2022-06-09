@@ -129,9 +129,9 @@ def handle_postback(event):
     elif event.postback.data[0:1] == "B":
         place_type = event.postback.data[4:]
         result = event.postback.data[2:].split('&')
-        crawl = location(result[1])
+        message = TextSendMessage(text=location(result[1]))
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=crawl))
+            event.reply_token, message)
 
 
 
