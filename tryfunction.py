@@ -1,3 +1,3 @@
-def location(message,place_type):
-    print(message,place_type)
-    return message,place_type
+def location(place_type):
+    print(place_type)
+    return place_type
