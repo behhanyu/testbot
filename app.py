@@ -24,11 +24,13 @@ import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('TuWwNdW0ZSpc+bYs/tiW2eSNy2OHbJCQ9Ry0/BRrNrKGEBIkpByKcZek6p1G05VTPQZZpKrmYUNX5AhFvRrwglntt6CKb2XYyEXafpWmyEYTtBtLNZeb1q4B1hXLobHJUeHUgBsS4ghbICyGJoiAMwdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(
+    'TuWwNdW0ZSpc+bYs/tiW2eSNy2OHbJCQ9Ry0/BRrNrKGEBIkpByKcZek6p1G05VTPQZZpKrmYUNX5AhFvRrwglntt6CKb2XYyEXafpWmyEYTtBtLNZeb1q4B1hXLobHJUeHUgBsS4ghbICyGJoiAMwdB04t89/1O/w1cDnyilFU=')
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('31092f163fbb7a9bd6af2e1d6c0bde4b')
 
-line_bot_api.push_message('Uf98cfa672a8785aa0b0d6bbd458a5bef', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message(
+    'Uf98cfa672a8785aa0b0d6bbd458a5bef', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
 
@@ -93,10 +95,72 @@ def handle_message(event):
                                        ]))
         line_bot_api.reply_message(event.reply_token, flex_message)
     else:
-        message = event.message.text
-        result = location(place_type)
+        carousel_template_message = TemplateSendMessage(
+            alt_text='免費教學影片',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://i.imgur.com/wpM584d.jpg',
+                        title='台北福華大飯店',
+                        text='106台北市大安區仁愛路三段160號',
+                        actions=[
+                            MessageAction(
+                                label='電話預定',
+                                text='02 2700 2323'
+                            ),
+                            URIAction(
+                                label='綫上訂房',
+                                uri='https://tw.hotels.com/ho114106/tai-bei-fu-hua-da-fan-dian-tai-bei-tai-wan/?chkin=2022-09-06&chkout=2022-09-07&x_pwa=1&rfrr=HSR&pwa_ts=1654770961068&referrerUrl=aHR0cHM6Ly90dy5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=3518&destination=%E5%8F%B0%E5%8C%97%2C+%E5%8F%B0%E7%81%A3&destType=MARKET&neighborhoodId=6063187&selected=13054&sort=RECOMMENDED&top_dp=3100&top_cur=TWD&MDPDTL=HTL.13054.20220906.20220907.DDT.89.CID.9899498146.AUDID.&mdpcid=HCOM-TW.META.HPA.HOTEL-CORESEARCH-desktop.HOTEL&gclid=CjwKCAjwtIaVBhBkEiwAsr7-c-QThpo6BUTyrodJncOltyRCG0ndHMyjl9db-nCkZ-F4W4I7DAthtxoCQ2gQAvD_BwE&mctc=10&semdtl=&userIntent=&selectedRoomType=200189906&selectedRatePlan=204547410&expediaPropertyId=13054'
+                            ),
+                            URIAction(
+                                label='帶我去',
+                                uri='https://goo.gl/maps/ZpdjAN6FEsSUBm6Y9'
+                            )
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
+                        title='台北遠東香格里拉',
+                        text='106台北市大安區敦化南路二段201號',
+                        actions=[
+                            MessageAction(
+                                label='電話預定',
+                                text='02 2378 8888'
+                            ),
+                            URIAction(
+                                label='綫上訂房',
+                                uri='https://tw.hotels.com/ho134169/tai-bei-yuan-dong-xiang-ge-li-la-tai-bei-tai-wan/?chkin=2022-06-23&chkout=2022-06-24&x_pwa=1&rfrr=HSR&pwa_ts=1654770952031&referrerUrl=aHR0cHM6Ly90dy5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=3518&destination=%E5%8F%B0%E5%8C%97%2C+%E5%8F%B0%E7%81%A3&destType=MARKET&neighborhoodId=6063187&selected=14153&sort=RECOMMENDED&top_dp=4500&top_cur=TWD&MDPDTL=HTL.14153.20220623.20220624.DDT.14.CID.9899498146.AUDID.&mdpcid=HCOM-TW.META.HPA.HOTEL-CORESEARCH-desktop.HOTEL&gclid=CjwKCAjwtIaVBhBkEiwAsr7-c_CL2-VZ5-s5PIZjTNy2PkIrRiK_dA75gA3xyX4rqLICJzBJyFyX0hoC2cYQAvD_BwE&mctc=10&semdtl=&userIntent=&selectedRoomType=202163329&selectedRatePlan=240224907&expediaPropertyId=14153'
+                            ),
+                            URIAction(
+                                label='帶我去',
+                                uri='https://goo.gl/maps/GjV7P5GU6KAdyvCw7'
+                            )
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
+                        title='福容大飯店 台北一館',
+                        text='台北市建國南路一段266號',
+                        actions=[
+                            MessageAction(
+                                label='電話預定',
+                                text='02 2701 9266'
+                            ),
+                            URIAction(
+                                label='綫上訂房',
+                                uri='https://tw.hotels.com/ho308819/fu-rong-da-fan-dian-tai-bei-yi-guan-tai-bei-tai-wan/?chkin=2022-09-06&chkout=2022-09-07&x_pwa=1&rfrr=HSR&pwa_ts=1654771257650&referrerUrl=aHR0cHM6Ly90dy5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=3518&destination=%E5%8F%B0%E5%8C%97%2C+%E5%8F%B0%E7%81%A3&destType=MARKET&neighborhoodId=6063187&selected=2436987&sort=RECOMMENDED&top_dp=3238&top_cur=TWD&MDPDTL=HTL.13054.20220906.20220907.DDT.89.CID.9899498146.AUDID.&mdpcid=HCOM-TW.META.HPA.HOTEL-CORESEARCH-desktop.HOTEL&gclid=CjwKCAjwtIaVBhBkEiwAsr7-c-QThpo6BUTyrodJncOltyRCG0ndHMyjl9db-nCkZ-F4W4I7DAthtxoCQ2gQAvD_BwE&mctc=10&semdtl=&userIntent=&selectedRoomType=356771&selectedRatePlan=201498430&expediaPropertyId=2436987'
+                            ),
+                            URIAction(
+                                label='帶我去',
+                                uri='https://g.page/fullonhoteltaipei?share'
+                            )
+                        ]
+                    )
+                ]
+            )
+        )
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=result))
+            event.reply_token, carousel_template_message)
 
 
 @handler.add(PostbackEvent)
