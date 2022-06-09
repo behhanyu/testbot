@@ -9,7 +9,7 @@ Line Bot聊天機器人
 """
 # 載入LineBot所需要的套件
 import os
-from tryfunction import *
+from new_give_15_option import *
 from flask import Flask, request, abort
 
 from linebot import (
@@ -96,7 +96,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     else:
         message = event.message.text
-        result = location(message)
+        result = new_give_15_option(message,place_type)
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=result))
 
