@@ -8,3 +8,7 @@ SnowNLP
 emoji
 pyshorteners
 scipy
+Image
+BytesIO
+googlemaps
+time
