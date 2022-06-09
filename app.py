@@ -96,7 +96,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     else:
         message = event.message.text
-        result = new_give_15_option(place_type)
+        result = tryfunction(place_type)
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=result))
 
