@@ -100,12 +100,8 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://cdn2.ettoday.net/images/5540/d5540806.jpg',
                         title='台北福華大飯店',
-                        text='106台北市大安區仁愛路三段160號',
+                        text='02 2700 2323',
                         actions=[
-                            MessageAction(
-                                label='電話預定',
-                                text='02 2700 2323'
-                            ),
                             URIAction(
                                 label='綫上訂房',
                                 uri='https://tw.hotels.com/ho114106/tai-bei-fu-hua-da-fan-dian-tai-bei-tai-wan/?chkin=2022-09-06&chkout=2022-09-07&x_pwa=1&rfrr=HSR&pwa_ts=1654770961068&referrerUrl=aHR0cHM6Ly90dy5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=3518&destination=%E5%8F%B0%E5%8C%97%2C+%E5%8F%B0%E7%81%A3&destType=MARKET&neighborhoodId=6063187&selected=13054&sort=RECOMMENDED&top_dp=3100&top_cur=TWD&MDPDTL=HTL.13054.20220906.20220907.DDT.89.CID.9899498146.AUDID.&mdpcid=HCOM-TW.META.HPA.HOTEL-CORESEARCH-desktop.HOTEL&gclid=CjwKCAjwtIaVBhBkEiwAsr7-c-QThpo6BUTyrodJncOltyRCG0ndHMyjl9db-nCkZ-F4W4I7DAthtxoCQ2gQAvD_BwE&mctc=10&semdtl=&userIntent=&selectedRoomType=200189906&selectedRatePlan=204547410&expediaPropertyId=13054'
@@ -119,12 +115,8 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill/v1611214373/hotel/aktqhvjiypw9d6barcz0.jpg',
                         title='台北遠東香格里拉',
-                        text='106台北市大安區敦化南路二段201號',
+                        text='02 2378 8888',
                         actions=[
-                            MessageAction(
-                                label='電話預定',
-                                text='02 2378 8888'
-                            ),
                             URIAction(
                                 label='綫上訂房',
                                 uri='https://tw.hotels.com/ho134169/tai-bei-yuan-dong-xiang-ge-li-la-tai-bei-tai-wan/?chkin=2022-06-23&chkout=2022-06-24&x_pwa=1&rfrr=HSR&pwa_ts=1654770952031&referrerUrl=aHR0cHM6Ly90dy5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=3518&destination=%E5%8F%B0%E5%8C%97%2C+%E5%8F%B0%E7%81%A3&destType=MARKET&neighborhoodId=6063187&selected=14153&sort=RECOMMENDED&top_dp=4500&top_cur=TWD&MDPDTL=HTL.14153.20220623.20220624.DDT.14.CID.9899498146.AUDID.&mdpcid=HCOM-TW.META.HPA.HOTEL-CORESEARCH-desktop.HOTEL&gclid=CjwKCAjwtIaVBhBkEiwAsr7-c_CL2-VZ5-s5PIZjTNy2PkIrRiK_dA75gA3xyX4rqLICJzBJyFyX0hoC2cYQAvD_BwE&mctc=10&semdtl=&userIntent=&selectedRoomType=202163329&selectedRatePlan=240224907&expediaPropertyId=14153'
@@ -138,12 +130,8 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://img.ltn.com.tw/Upload/news/600/2021/08/27/3652747_1_1.jpg',
                         title='福容大飯店 台北一館',
-                        text='台北市建國南路一段266號',
+                        text='02 2701 9266',
                         actions=[
-                            MessageAction(
-                                label='電話預定',
-                                text='02 2701 9266'
-                            ),
                             URIAction(
                                 label='綫上訂房',
                                 uri='https://tw.hotels.com/ho308819/fu-rong-da-fan-dian-tai-bei-yi-guan-tai-bei-tai-wan/?chkin=2022-09-06&chkout=2022-09-07&x_pwa=1&rfrr=HSR&pwa_ts=1654771257650&referrerUrl=aHR0cHM6Ly90dy5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=3518&destination=%E5%8F%B0%E5%8C%97%2C+%E5%8F%B0%E7%81%A3&destType=MARKET&neighborhoodId=6063187&selected=2436987&sort=RECOMMENDED&top_dp=3238&top_cur=TWD&MDPDTL=HTL.13054.20220906.20220907.DDT.89.CID.9899498146.AUDID.&mdpcid=HCOM-TW.META.HPA.HOTEL-CORESEARCH-desktop.HOTEL&gclid=CjwKCAjwtIaVBhBkEiwAsr7-c-QThpo6BUTyrodJncOltyRCG0ndHMyjl9db-nCkZ-F4W4I7DAthtxoCQ2gQAvD_BwE&mctc=10&semdtl=&userIntent=&selectedRoomType=356771&selectedRatePlan=201498430&expediaPropertyId=2436987'
